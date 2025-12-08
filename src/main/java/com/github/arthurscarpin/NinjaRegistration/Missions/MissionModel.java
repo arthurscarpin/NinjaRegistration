@@ -2,9 +2,15 @@ package com.github.arthurscarpin.NinjaRegistration.Missions;
 
 import com.github.arthurscarpin.NinjaRegistration.Ninjas.NinjaModel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tb_mission")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class MissionModel {
 
     @Id
@@ -18,28 +24,4 @@ public class MissionModel {
     // @OneToMany - A mission can have many ninjas
     @OneToMany(mappedBy = "missions")
     private NinjaModel ninja;
-
-    public MissionModel() {
-    }
-
-    public MissionModel(String name, MissionRank rank) {
-        this.name = name;
-        this.rank = rank;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public MissionRank getRank() {
-        return rank;
-    }
-
-    public void setRank(MissionRank rank) {
-        this.rank = rank;
-    }
 }
