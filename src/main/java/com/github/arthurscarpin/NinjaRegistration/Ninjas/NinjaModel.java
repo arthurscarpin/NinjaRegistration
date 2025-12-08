@@ -1,6 +1,9 @@
-package com.github.arthurscarpin.NinjaRegistration;
+package com.github.arthurscarpin.NinjaRegistration.Ninjas;
 
+import com.github.arthurscarpin.NinjaRegistration.Missions.MissionModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 // Entity - Transform the class to a Database Entity
 // JPA - Java Persistence API
@@ -17,6 +20,8 @@ public class NinjaModel {
     private String email;
 
     private int age;
+
+    private List<MissionModel> missions;
 
     public NinjaModel() {
     }

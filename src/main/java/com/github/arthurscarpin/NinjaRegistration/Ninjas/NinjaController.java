@@ -1,4 +1,4 @@
-package com.github.arthurscarpin.NinjaRegistration;
+package com.github.arthurscarpin.NinjaRegistration.Ninjas;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
