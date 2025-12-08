@@ -15,6 +15,8 @@ public class MissionModel {
 
     private MissionRank rank;
 
+    // @OneToMany - A mission can have many ninjas
+    @OneToMany(mappedBy = "missions")
     private NinjaModel ninja;
 
     public MissionModel() {

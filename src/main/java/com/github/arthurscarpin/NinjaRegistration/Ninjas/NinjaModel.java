@@ -21,7 +21,10 @@ public class NinjaModel {
 
     private int age;
 
-    private List<MissionModel> missions;
+    // @ManyToOne - A ninja can have one mission
+    @ManyToOne
+    @JoinColumn(name = "mission_id") // Foreign Key
+    private MissionModel missions;
 
     public NinjaModel() {
     }
