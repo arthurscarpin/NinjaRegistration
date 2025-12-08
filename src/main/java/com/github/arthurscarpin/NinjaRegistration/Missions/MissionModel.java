@@ -15,10 +15,13 @@ public class MissionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "rank")
     private MissionRank rank;
 
     // @OneToMany - A mission can have many ninjas
