@@ -24,6 +24,7 @@ public class MissionModel {
     private String name;
 
     @Column(name = "rank")
+    @Enumerated(EnumType.STRING)
     private MissionRank rank;
 
     // @OneToMany - A mission can have many ninjas
