@@ -2,9 +2,17 @@ package com.github.arthurscarpin.NinjaRegistration.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ninja")
 public class NinjaController {
+
+    private final NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     // Welcome route
     @GetMapping("/welcome")
@@ -20,8 +28,8 @@ public class NinjaController {
 
     // To find all ninjas (READ)
     @GetMapping("/listAll")
-    public String listAllNinjas() {
-        return "List of all ninjas.";
+    public List<NinjaModel> listAllNinjas() {
+        return ninjaService.listAll();
     }
 
     // To find ninja by id (READ)
