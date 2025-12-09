@@ -3,7 +3,7 @@ package com.github.arthurscarpin.NinjaRegistration.Ninjas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/ninja")
 public class NinjaController {
 
     // Welcome route
@@ -19,14 +19,14 @@ public class NinjaController {
     }
 
     // To find all ninjas (READ)
-    @GetMapping("/all")
-    public String getAllNinjas() {
+    @GetMapping("/listAll")
+    public String listAllNinjas() {
         return "List of all ninjas.";
     }
 
     // To find ninja by id (READ)
-    @GetMapping("/allID")
-    public String getAllNinjasById() {
+    @GetMapping("/listID")
+    public String listNinjaById() {
         return "List of all ninjas by ID.";
     }
 
