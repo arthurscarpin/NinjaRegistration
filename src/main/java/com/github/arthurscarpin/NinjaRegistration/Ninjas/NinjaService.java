@@ -14,6 +14,11 @@ public class NinjaService {
         this.ninjaRepository = ninjaRepository;
     }
 
+    // Create new ninja
+    public NinjaModel createNinja(NinjaModel ninja) {
+        return ninjaRepository.save(ninja);
+    }
+
     // List all ninjas
     public List<NinjaModel> listAll() {
         return ninjaRepository.findAll();
@@ -24,4 +29,6 @@ public class NinjaService {
         Optional<NinjaModel> ninjaById = ninjaRepository.findById(id);
         return ninjaById.orElse(null);
     }
+
+
 }
