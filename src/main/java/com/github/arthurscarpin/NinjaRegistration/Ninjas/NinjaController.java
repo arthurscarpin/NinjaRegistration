@@ -23,7 +23,7 @@ public class NinjaController {
     // To add ninja (CREATE)
     @PostMapping("/create")
     public NinjaModel createNinja(@RequestBody NinjaModel ninja) {
-        return ninjaService.createNinja(ninja);
+        return ninjaService.create(ninja);
     }
 
     // To find all ninjas (READ)
@@ -45,8 +45,8 @@ public class NinjaController {
     }
 
     // To delete ninja (DELETE)
-    @DeleteMapping("/deleteID")
-    public String deleteNinjaById() {
-        return "Ninja deleted!";
+    @DeleteMapping("/delete/{id}")
+    public void deleteNinjaById(@PathVariable Long id) {
+        ninjaService.deleteById(id);
     }
 }

@@ -15,7 +15,7 @@ public class NinjaService {
     }
 
     // Create new ninja
-    public NinjaModel createNinja(NinjaModel ninja) {
+    public NinjaModel create(NinjaModel ninja) {
         return ninjaRepository.save(ninja);
     }
 
@@ -30,5 +30,10 @@ public class NinjaService {
         return ninjaById.orElse(null);
     }
 
+    //Update ninja by ID
 
+    // Delete ninja by ID - It has to return void
+    public void deleteById(Long id) {
+        ninjaRepository.deleteById(id);
+    }
 }
