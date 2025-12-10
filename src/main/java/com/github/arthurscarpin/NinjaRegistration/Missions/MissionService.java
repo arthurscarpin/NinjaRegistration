@@ -31,6 +31,14 @@ public class MissionService {
     }
 
     //Update mission by ID
+    public MissionModel updateById(Long id, MissionModel missionUpdated) {
+        if (missionRepository.existsById(id)) {
+            missionUpdated.setId(id);
+            return missionRepository.save(missionUpdated);
+        } else {
+            return null;
+        }
+    }
 
     // Delete mission by ID - It has to return void
     public void deleteById(Long id) {
