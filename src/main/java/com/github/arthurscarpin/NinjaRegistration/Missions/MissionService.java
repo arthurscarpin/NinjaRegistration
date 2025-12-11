@@ -10,13 +10,18 @@ public class MissionService {
 
     private final MissionRepository missionRepository;
 
-    public MissionService(MissionRepository missionRepository) {
+    private final MissionMapper missionMapper;
+
+    public MissionService(MissionRepository missionRepository, MissionMapper missionMapper) {
         this.missionRepository = missionRepository;
+        this.missionMapper = missionMapper;
     }
 
     // Create new mission
-    public MissionModel create(MissionModel mission) {
-        return missionRepository.save(mission);
+    public MissionDTO create(MissionDTO missionDTO) {
+        MissionModel mission = missionMapper.map(missionDTO);
+        mission = missionRepository.save(mission);
+        return missionMapper.map(mission);
     }
 
     // List all missions

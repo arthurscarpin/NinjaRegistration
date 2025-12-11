@@ -16,7 +16,7 @@ public class MissionController {
 
     // To create mission (CREATE)
     @PostMapping("/create")
-    public MissionModel createMission(@RequestBody MissionModel mission) {
+    public MissionDTO createMission(@RequestBody MissionDTO mission) {
         return missionService.create(mission);
     }
 

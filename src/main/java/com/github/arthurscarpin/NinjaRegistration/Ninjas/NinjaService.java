@@ -10,13 +10,18 @@ public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    private final NinjaMapper ninjaMapper;
+
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     // Create new ninja
-    public NinjaModel create(NinjaModel ninja) {
-        return ninjaRepository.save(ninja);
+    public NinjaDTO create(NinjaDTO ninjaDTO) {
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.map(ninja);
     }
 
     // List all ninjas
