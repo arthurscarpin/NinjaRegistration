@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MissionService {
@@ -25,24 +26,30 @@ public class MissionService {
     }
 
     // List all missions
-    public List<MissionModel> listAll() {
-        return missionRepository.findAll();
+    public List<MissionDTO> listAll() {
+        List<MissionModel> mission = missionRepository.findAll();
+        return mission.stream()
+                .map(missionMapper::map)
+                .collect(Collectors.toList());
     }
 
     // List mission by ID
-    public MissionModel listById(Long id) {
+    public MissionDTO listById(Long id) {
         Optional<MissionModel> mission = missionRepository.findById(id);
-        return mission.orElse(null);
+        return mission.map(missionMapper::map)
+                .orElse(null);
     }
 
     //Update mission by ID
-    public MissionModel updateById(Long id, MissionModel missionUpdated) {
-        if (missionRepository.existsById(id)) {
-            missionUpdated.setId(id);
-            return missionRepository.save(missionUpdated);
-        } else {
-            return null;
+    public MissionDTO updateById(Long id, MissionDTO missionDTO) {
+        Optional<MissionModel> missionExisting = missionRepository.findById(id);
+        if (missionExisting.isPresent()) {
+            MissionModel missionToUpdate = missionMapper.map(missionDTO);
+            missionToUpdate.setId(id);
+            missionToUpdate = missionRepository.save(missionToUpdate);
+            return missionMapper.map(missionToUpdate);
         }
+        return null;
     }
 
     // Delete mission by ID - It has to return void
