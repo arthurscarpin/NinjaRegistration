@@ -30,6 +30,10 @@ public class NinjaModel {
     @Column(name = "age")
     private int age;
 
+    @Column(name = "rank")
+    @Enumerated(EnumType.STRING)
+    private NinjaRank rank;
+
     // @ManyToOne - A ninja can have one mission
     @ManyToOne
     @JoinColumn(name = "mission_id") // Foreign Key
