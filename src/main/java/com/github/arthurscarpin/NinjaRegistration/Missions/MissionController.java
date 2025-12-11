@@ -16,25 +16,25 @@ public class MissionController {
 
     // To create mission (CREATE)
     @PostMapping("/create")
-    public MissionModel createMission(@RequestBody MissionModel mission) {
+    public MissionDTO createMission(@RequestBody MissionDTO mission) {
         return missionService.create(mission);
     }
 
     // To find all missions (READ)
     @GetMapping("/list")
-    public List<MissionModel> listAllMissions() {
+    public List<MissionDTO> listAllMissions() {
         return missionService.listAll();
     }
 
     // To find mission by id (READ)
     @GetMapping("/list/{id}")
-    public MissionModel listMissionById(@PathVariable Long id) {
+    public MissionDTO listMissionById(@PathVariable Long id) {
         return missionService.listById(id);
     }
 
     // To update mission (UPDATE)
     @PutMapping("/alter/{id}")
-    public MissionModel updateMissionById(@PathVariable Long id, @RequestBody MissionModel missionUpdated) {
+    public MissionDTO updateMissionById(@PathVariable Long id, @RequestBody MissionDTO missionUpdated) {
         return missionService.updateById(id, missionUpdated);
     }
 
