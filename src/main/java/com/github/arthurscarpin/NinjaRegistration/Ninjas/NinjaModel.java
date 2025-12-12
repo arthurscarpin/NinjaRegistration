@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString(exclude = "missions")
 public class NinjaModel {
 
     @Id
