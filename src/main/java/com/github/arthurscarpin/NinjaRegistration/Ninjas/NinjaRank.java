@@ -4,5 +4,8 @@ public enum NinjaRank {
     GENIN,
     CHUNIN,
     JONIN,
-    KAGE
+    ANBU,
+    SANIN,
+    KAGE,
+    AKATSUKI_MEMBER
 }
