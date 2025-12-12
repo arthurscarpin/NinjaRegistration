@@ -101,6 +101,48 @@
         .form-container a:hover {
             background: #565d63;
         }
+
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #ccd4dd;
+            background: #fff;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+            appearance: none; /* remove estilo padrão do browser */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: 0.2s;
+        }
+
+        select:hover,
+        select:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.4);
+            outline: none;
+        }
+
+        select option {
+            color: #333;
+            background: #fff;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: "▼"; /* seta */
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #4a90e2;
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +164,13 @@
 
             <label for="rank">Rank:</label>
             <input type="text" id="rank" th:field="*{rank}" />
+
+            <label for="mission">Mission:</label>
+            <select id="mission" th:field="*{missions}">
+                <option th:each="mission : ${missions}"
+                        th:value="${mission.id}"
+                        th:text="${mission.name}">Mission Name</option>
+            </select>
 
             <button type="submit">Register Ninja</button>
         </form>

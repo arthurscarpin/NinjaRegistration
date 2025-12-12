@@ -1,10 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ninja Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+        }
+
+        div {
+            max-width: 700px;
+            background: #fff;
+            margin: auto;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        div img {
+            border-radius: 12px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        /* Details */
+        p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        p strong {
+            color: #4a90e2;
+        }
+
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+        }
+
+        thead {
+            background: #4a90e2;
+            color: white;
+        }
+
+        thead th {
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fbfd;
+        }
+
+        tbody td {
+            padding: 12px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 18px;
+            text-decoration: none;
+            background: #4a90e2;
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: 0.2s ease-in-out;
+        }
+
+        a:hover {
+            background: #3575c0;
+        }
+    </style>
 </head>
 <body>
-$END$
+    <h1>Ninja Details</h1>
+    <div>
+        <img th:src="${ninja.imageUrl}" alt="${ninja.nome}" width="200" />
+        <h2 th:text="${ninja.name}"></h2>
+        <p><strong>Email:</strong> <span th:text="${ninja.email}"></span></p>
+        <p><strong>Age:</strong> <span th:text="${ninja.age}"></span></p>
+        <p><strong>Rank:</strong> <span th:text="${ninja.rank}"></span></p>
+
+        <h3>Missions:</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rank</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mission : ${ninja.missions}">
+                <td th:text="${mission.name}"></td>
+                <td th:text="${mission.rank}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a th:href="@{/ninja/ui/list}">Back to the ninja list</a>
 </body>
 </html>

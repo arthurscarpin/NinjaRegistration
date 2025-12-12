@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ninjas table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: #1a1a1a;
+        }
+
+        .btn-create {
+            display: inline-block;
+            margin: 0 0 20px 0; /* alinhado à esquerda */
+            text-decoration: none;
+            background: #28a745; /* verde agradável */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn-create:hover {
+            background: #218838; /* verde mais escuro no hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: #4a90e2;
+            color: white;
+        }
+
+        thead th {
+            padding: 14px;
+            font-size: 1rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f9fbfd;
+        }
+
+        tbody td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        table img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        a.action-btn {
+            padding: 6px 14px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.2s ease-in-out;
+            margin-right: 6px;
+        }
+
+        a.action-btn:nth-child(1) { background: #4a90e2; }
+        a.action-btn:nth-child(1):hover { background: #3575c0; }
+
+        a.action-btn:nth-child(2) { background: #ff9800; }
+        a.action-btn:nth-child(2):hover { background: #e08600; }
+
+        a.action-btn:nth-child(3) { background: #e74c3c; }
+        a.action-btn:nth-child(3):hover { background: #c0392b; }
+
+    </style>
+</head>
+<body>
+<h1>Ninjas list</h1>
+<a th:href="@{/ninja/ui/create}" class="btn-create">Add New Ninja</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Rank</th>
+        <th>Missions</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ninja : ${ninjas}">
+        <td th:text="${ninja.id}"></td>
+        <td>
+            <img th:src="${ninja.imageUrl}" width="100" height="100">
+        </td>
+        <td th:text="${ninja.name}"></td>
+        <td th:text="${ninja.age}"></td>
+        <td th:text="${ninja.email}"></td>
+        <td th:text="${ninja.rank}"></td>
+        <td>
+            <span th:if="${ninja.missions != null}">
+                <span th:each="mission : ${ninja.missions}">
+                    Name: <span th:text="${mission.name}"></span>,
+                    Rank: <span th:text="${mission.rank}"></span><br/>
+                </span>
+            </span>
+            <span th:if="${ninja.missions == null or #lists.isEmpty(ninja.missions)}">No missions assigned</span>
+        </td>
+        <td>
+            <a th:href="@{/ninja/ui/list/{id}(id=${ninja.id})}" class="action-btn">Show Details</a>
+            <a th:href="@{/ninja/ui/alter/{id}(id=${ninja.id})}" class="action-btn">Alter</a>
+            <a th:href="@{/ninja/ui/delete/{id}(id=${ninja.id})}" class="action-btn">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
