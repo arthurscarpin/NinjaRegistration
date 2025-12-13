@@ -4,7 +4,7 @@
 CREATE TABLE tb_mission (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    rank VARCHAR(50)
+    `rank` VARCHAR(50)
 );
 
 -- Ninjas table

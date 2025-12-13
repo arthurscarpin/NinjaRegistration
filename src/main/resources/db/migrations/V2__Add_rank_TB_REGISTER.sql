@@ -1,3 +1,3 @@
--- V2: Migration to add 'rank' column to 'TB_REGISTER' table
+-- V2: Migration to add 'rank' column to 'tb_register' table
 ALTER TABLE tb_register
-ADD COLUMN rank VARCHAR(255);
+ADD COLUMN `rank` VARCHAR(255);
