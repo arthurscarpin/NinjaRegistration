@@ -7,5 +7,5 @@ public enum NinjaRank {
     ANBU,
     SANIN,
     KAGE,
-    AKATSUKI_MEMBER
+    WANTED
 }
