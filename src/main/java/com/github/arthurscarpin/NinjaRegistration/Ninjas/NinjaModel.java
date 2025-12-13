@@ -31,7 +31,7 @@ public class NinjaModel {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "rank")
+    @Column(name = "mission_rank")
     @Enumerated(EnumType.STRING)
     private NinjaRank rank;
 

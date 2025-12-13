@@ -26,7 +26,7 @@ public class MissionModel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "rank")
+    @Column(name = "mission_rank")
     @Enumerated(EnumType.STRING)
     private MissionRank rank;
 
