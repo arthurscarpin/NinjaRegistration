@@ -1,19 +1,5 @@
-version: '3.9'
-
+version: "3.9"
 services:
-  # Application Service
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ninjaregistration_app
-    env_file:
-      - .env
-    ports:
-      - "8080:8080"
-    depends_on:
-      database:
-        condition: service_healthy
   # Database Service
   database:
     image: mysql:8.0
@@ -32,10 +18,36 @@ services:
     volumes:
       - database:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD || exit 1"]
+      test: [
+        "CMD-SHELL",
+        "mysqladmin ping -h localhost -u ${DATABASE_USERNAME} -p${DATABASE_PASSWORD} || exit 1"
+      ]
       interval: 10s
       timeout: 5s
-      retries: 10
-#Volume for database persistence
+      retries: 30
+  # Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ninjaregistration_app
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    entrypoint:
+      [
+        "/app/wait-for-it.sh",
+        "database:3306",
+        "--timeout=120",
+        "--strict",
+        "--",
+        "java",
+        "-jar",
+        "ninja-registration.jar"
+      ]
+# Volumes for persistent data
 volumes:
   database:
