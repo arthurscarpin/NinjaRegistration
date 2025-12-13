@@ -1,5 +1,7 @@
-version: '3.8'
+version: '3.9'
+
 services:
+  # Application Service
   app:
     build:
       context: .
@@ -7,9 +9,33 @@ services:
     container_name: ninjaregistration_app
     env_file:
       - .env
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "8080:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+  # Database Service
+  database:
+    image: mysql:8.0
+    container_name: ninjaregistration_db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USERNAME}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+#Volume for database persistence
+volumes:
+  database:
