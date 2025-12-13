@@ -2,7 +2,6 @@ package com.github.arthurscarpin.NinjaRegistration.Ninjas;
 
 import com.github.arthurscarpin.NinjaRegistration.Missions.MissionDTO;
 import com.github.arthurscarpin.NinjaRegistration.Missions.MissionMapper;
-import com.github.arthurscarpin.NinjaRegistration.Missions.MissionModel;
 import com.github.arthurscarpin.NinjaRegistration.Missions.MissionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,8 @@ public class NinjaControllerUI {
     }
 
     @PostMapping("/save")
-    public String saveCreateNinjaForm(@ModelAttribute NinjaDTO ninjaDTO, RedirectAttributes redirectAttributes) {
+    public String saveCreateNinjaForm(@ModelAttribute NinjaDTO ninjaDTO,
+                                      RedirectAttributes redirectAttributes) {
         ninjaService.create(ninjaDTO);
         redirectAttributes.addFlashAttribute("message", "Ninja created successfully!");
         return "redirect:/ninja/ui/list";
@@ -50,9 +50,9 @@ public class NinjaControllerUI {
 
     @GetMapping("/list/{id}")
     public String listNinjaById(@PathVariable Long id, Model model) {
-        NinjaDTO ninja = ninjaService.listById(id);
-        if (ninja != null) {
-            model.addAttribute("ninja", ninja);
+        NinjaDTO ninjaDTO = ninjaService.listById(id);
+        if (ninjaDTO != null) {
+            model.addAttribute("ninja", ninjaDTO);
             return "detailsNinja";
         } else {
             model.addAttribute("message", "Ninja not found.");
@@ -61,10 +61,12 @@ public class NinjaControllerUI {
     }
 
     @GetMapping("/alter/{id}")
-    public String updateNinjaForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
-        NinjaDTO ninja = ninjaService.listById(id);
-        if (ninja != null) {
-            model.addAttribute("ninja", ninja);
+    public String updateNinjaForm(@PathVariable Long id,
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
+        NinjaDTO ninjaDTO = ninjaService.listById(id);
+        if (ninjaDTO != null) {
+            model.addAttribute("ninja", ninjaDTO);
             model.addAttribute("missions", missionService.listAll());
             return "alterNinja";
         } else {
@@ -77,13 +79,7 @@ public class NinjaControllerUI {
     public String saveUpdateNinjaForm(@PathVariable Long id,
                                       @ModelAttribute NinjaDTO ninjaDTO,
                                       RedirectAttributes redirectAttributes) {
-        NinjaDTO existingNinjaDTO = ninjaService.listById(id);
-        if (existingNinjaDTO == null) {
-            redirectAttributes.addFlashAttribute("error", "Ninja not found!");
-            return "redirect:/ninja/ui/list";
-        }
-        Long missionId = ninjaDTO.getMissions().getId();
-        MissionDTO missionDTO = missionService.listById(missionId);
+        MissionDTO missionDTO = missionService.listById(ninjaDTO.getMissions().getId());
         ninjaDTO.setMissions(missionMapper.map(missionDTO));
         ninjaDTO.setId(id);
         ninjaService.updateById(id, ninjaDTO);
