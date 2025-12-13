@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mission Details</title>
+    <link rel="stylesheet" th:href="@{/details.css}">
 </head>
 <body>
-$END$
+<h1>Mission Details</h1>
+<div>
+    <h2 th:text="${mission.name}"></h2>
+    <p><strong>Rank:</strong> <span th:text="${mission.rank}"></span></p>
+</div>
+<a th:href="@{/mission/ui/list}">Back to the missions list</a>
 </body>
 </html>

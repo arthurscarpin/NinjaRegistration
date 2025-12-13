@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create Mission</title>
+    <link rel="stylesheet" th:href="@{/create.css}">
 </head>
 <body>
-$END$
+<h1>Add New Mission</h1>
+<div class="form-container">
+    <div th:if="${message}" class="message" th:text="${message}"></div>
+    <form th:action="@{/mission/ui/save}" th:object="${mission}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" th:field="*{rank}" />
+
+        <button type="submit">Register Mission</button>
+    </form>
+    <a th:href="@{/mission/ui/list}">Back to the missions list</a>
+</div>
 </body>
 </html>

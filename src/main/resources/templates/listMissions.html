@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Missions List</title>
+    <link rel="stylesheet" th:href="@{/list.css}">
 </head>
 <body>
-$END$
+<h1>Missions list</h1>
+<a th:href="@{/mission/ui/create}" class="btn-create">Add New Mission</a>
+<a th:href="@{/ninja/ui/list}" class="btn-view">View Ninjas</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Rank</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mission : ${missions}">
+        <td th:text="${mission.id}"></td>
+        <td th:text="${mission.name}"></td>
+        <td th:text="${mission.rank}"></td>
+        <td>
+            <a th:href="@{/mission/ui/list/{id}(id=${mission.id})}" class="action-btn">Show Details</a>
+            <a th:href="@{/mission/ui/alter/{id}(id=${mission.id})}" class="action-btn">Alter</a>
+            <a th:href="@{/mission/ui/delete/{id}(id=${mission.id})}" class="action-btn">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
